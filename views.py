@@ -3,11 +3,15 @@ from app import app
 from flask import Flask, flash, request, redirect, render_template, session
 from werkzeug.utils import secure_filename
 import csv
+
 # Mugdha imports for Merkle Tree
 import hashlib
 from math import sqrt
 from merkletools import MerkleTools
 import json
+
+# Prachiti Resume Parser
+from resumeParser import ResumeParser
 
 UNIVERSITY_ALLOWED_EXTENSIONS = set(['csv'])
 VERIFIER_ALLOWED_EXTENSIONS = set(['pdf', 'json'])
@@ -106,5 +110,19 @@ def verify():
 			json.save(os.path.join(app.config['JSON_FOLDER'], json_name))
 			pdf_name = secure_filename(pdf.filename)
 			pdf.save(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
+			resumeJsonFile = ResumeParser.parse(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
+
+			with open(os.path.join(app.config['JSON_FOLDER'], json_name)) as receiptJson:
+				receiptJsonData = json(receiptJson.read())	
+				# print(data)
+				receiptJsonData = json.loads(json.dumps(receiptJson))
+			
+			with open(os.path.join(app.config['RESUMEJSON_FOLDER'], resumeJsonFile)) as resumeJson:
+				resumeJsonData = json(resumeJson.read())
+				# resumeJsonData = json.load(resumeJson)
+				# resumeJson = json.loads(json.dumps(resumeJson))
+			
+			if resumeJsonData["cpi"] != receiptJsonData["cpi"] or resumeJsonData["name"] != receiptJson["name"] or resumeJsonData["year"] != receiptJson["year"]:
+				flash("Details don't match")
 
 	return render_template('verify.html')
