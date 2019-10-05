@@ -77,13 +77,8 @@ class ResumeParser:
 		data["name"] = str(name[0])
 		data["year"] = str(year)
 		data["institution"] = str(institution[0])
-
-		fileName = str(name[0]) + '.json'
 		
-		with open(os.path.join(app.config['RESUMEJSON_FOLDER'], fileName), 'w') as outfile:
-			json.dump(data, outfile)
-		
-		return fileName
+		return data
 
 if __name__ == '__main__':
 	resume = ResumeParser('resume1.pdf')

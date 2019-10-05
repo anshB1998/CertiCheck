@@ -1,6 +1,6 @@
 import os
 from app import app
-from flask import Flask, flash, request, redirect, render_template, session
+from flask import Flask, flash, request, redirect, render_template, session, jsonify
 from werkzeug.utils import secure_filename
 import csv
 
@@ -9,6 +9,7 @@ import hashlib
 from math import sqrt
 from merkletools import MerkleTools
 import json
+import ast
 
 # Prachiti Resume Parser
 from resumeParser import ResumeParser
@@ -92,8 +93,7 @@ def upload_file():
 					filename = str(row[1]) + '.json'
 
 					with open(os.path.join(app.config['RECEIPT_FOLDER'], filename), 'w') as json_file:
-						json.dump(data, json_file)
-
+						json_file.write(json.dumps(data))
 					print(data)
 					
 	return render_template('upload.html', universities=universities)
@@ -104,29 +104,26 @@ def verify():
 		if 'json' not in request.files or 'pdf' not in request.files:
 			flash('All files not selected')
 			return render_template('verify.html')
-		json = request.files['json']
+		jsonFile = request.files['json']
 		pdf = request.files['pdf']
-		if json.filename == '' or pdf.filename == '':
+		if jsonFile.filename == '' or pdf.filename == '':
 			flash('All files not selected')
 			return render_template('verify.html')
-		if json and allowed_verification_file(json.filename) and pdf and allowed_verification_file(pdf.filename):
-			json_name = secure_filename(json.filename)
-			json.save(os.path.join(app.config['JSON_FOLDER'], json_name))
+		if jsonFile and allowed_verification_file(jsonFile.filename) and pdf and allowed_verification_file(pdf.filename):
+			json_name = secure_filename(jsonFile.filename)
+			jsonFile.save(os.path.join(app.config['JSON_FOLDER'], json_name))
 			pdf_name = secure_filename(pdf.filename)
 			pdf.save(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
-			resumeJsonFile = ResumeParser.parse(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
+			resumeJsonData = ResumeParser.parse(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
+			print(resumeJsonData)
 
 			with open(os.path.join(app.config['JSON_FOLDER'], json_name)) as receiptJson:
-				receiptJsonData = json(receiptJson.read())	
-				# print(data)
-				receiptJsonData = json.loads(json.dumps(receiptJson))
+				receiptJsonData = json.loads(receiptJson.read())	
 			
-			with open(os.path.join(app.config['RESUMEJSON_FOLDER'], resumeJsonFile)) as resumeJson:
-				resumeJsonData = json(resumeJson.read())
-				# resumeJsonData = json.load(resumeJson)
-				# resumeJson = json.loads(json.dumps(resumeJson))
+			print(receiptJsonData)
 			
-			if resumeJsonData["cpi"] != receiptJsonData["cpi"] or resumeJsonData["name"] != receiptJson["name"] or resumeJsonData["year"] != receiptJson["year"]:
+			if resumeJsonData["cpi"] != receiptJsonData["cpi"] or resumeJsonData["name"] != receiptJsonData["name"] or resumeJsonData["year"] != receiptJsonData["year"]:
+				print("not matched")
 				flash("Details don't match")
 
 	return render_template('verify.html')
