@@ -1,0 +1,31 @@
+{% block body %}
+    <h3>Select files to upload</h3>
+    <p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </p>
+    <form method="post" action="/verify" enctype="multipart/form-data">
+        <dl>
+            <p>Upload JSON file</p>
+            <p>
+                <input type="file" name="json" autocomplete="off" required>
+            </p>
+        </dl>
+        <dl>
+            <p>Upload Resume (in .pdf format)</p>
+            <p>
+                <input type="file" name="pdf" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Verify">
+        </p>
+    </form>
+{% endblock %} 
