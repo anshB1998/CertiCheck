@@ -33,6 +33,10 @@ def login():
 		return render_template('upload.html', universities=universities)
 	return render_template('login.html')
 
+@app.route('/', methods=['GET', 'POST'])
+def home():
+	return render_template('home.html')
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
 	universities = ['VJTI', 'IITB', 'KJSCE']
