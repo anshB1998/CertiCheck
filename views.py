@@ -25,6 +25,8 @@ def login():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
+	print(app.config['CSV_FOLDER'])
+	print(os.getcwd())
 	universities = ['VJTI', 'IITB', 'KJSCE']
 	# login()
 	if request.method == 'POST':
@@ -83,7 +85,7 @@ def upload_file():
 
 					print(data)
 					
-	return render_template('home.html', universities=universities)
+	return render_template('upload.html', universities=universities)
 
 @app.route('/verify', methods=['GET', 'POST'])
 def verify():
@@ -103,6 +105,3 @@ def verify():
 			pdf.save(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
 
 	return render_template('verify.html')
-
-if __name__ == "__main__":
-	app.run(debug = True)
