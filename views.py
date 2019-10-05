@@ -115,12 +115,9 @@ def verify():
 			pdf_name = secure_filename(pdf.filename)
 			pdf.save(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
 			resumeJsonData = ResumeParser.parse(os.path.join(app.config['RESUME_FOLDER'], pdf_name))
-			print(resumeJsonData)
 
 			with open(os.path.join(app.config['JSON_FOLDER'], json_name)) as receiptJson:
-				receiptJsonData = json.loads(receiptJson.read())	
-			
-			print(receiptJsonData)
+				receiptJsonData = json.loads(receiptJson.read())
 			
 			if resumeJsonData["cpi"] != receiptJsonData["cpi"] or resumeJsonData["name"] != receiptJsonData["name"] or resumeJsonData["year"] != receiptJsonData["year"]:
 				print("not matched")
