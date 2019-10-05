@@ -30,7 +30,6 @@ def login():
 		username = request.form['username']
 		session['logged_in'] = True
 		session['username'] = username
-		# print(session['username'])
 		return render_template('upload.html', universities=universities)
 	return render_template('login.html')
 
@@ -40,14 +39,16 @@ def home():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
+	
 	universities = ['VJTI', 'IITB', 'KJSCE']
 	if request.method == 'POST':
 		if 'file' not in request.files:
-			flash('No file selected')
-			return render_template('upload.html', universities=universities)
+			flash("No file selected", "danger")
+			error = "No file selected"
+			return render_template('upload.html', universities=universities, error = error)
 		file = request.files['file']
 		if file.filename == '':
-			flash('No file selected')
+			flash("No file selected", "error")
 			return render_template('upload.html', universities=universities)
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
@@ -61,16 +62,15 @@ def upload_file():
 				reader = csv.reader(File)
 				for row in reader:
 					
-					data = str(row[0]) + str(row[2]) + str(row[1]) + str(row[3])
-					print(data)
-
+					#studentID CPI Name batch college
+					data = str(row[0]) + str(row[2]) + str(row[1]) + str(row[3]) + session['username']
 					mt.add_leaf(data, do_hash= True)
 					count += 1
 
 			mt.make_tree()
-			if mt.get_leaf_count() != count:
-				print("not equal")
-				print(count, mt.get_leaf_count())
+			# if mt.get_leaf_count() != count:
+				# print("not equal")
+				# print(count, mt.get_leaf_count())
 			if mt.get_tree_ready_state:
 				merkleRoot = mt.get_merkle_root()
 			print(merkleRoot)
@@ -80,13 +80,12 @@ def upload_file():
 			with open(os.path.join(app.config['CSV_FOLDER'], filename)) as File:  
 				reader = csv.reader(File)
 				for row in reader:
-					print(row)
 					data={}
 					data["cpi"] = str(row[2])
 					data["name"] = str(row[1])
 					data["year"] = str(row[3])
 					data["studentId"] = str(row[0])
-										
+					data["institution"] = session['username']
 					data["merklePath"] = mt.get_proof(itr)
 					itr += 1
 
@@ -94,7 +93,8 @@ def upload_file():
 
 					with open(os.path.join(app.config['RECEIPT_FOLDER'], filename), 'w') as json_file:
 						json_file.write(json.dumps(data))
-					print(data)
+					
+				flash("Successfully uploaded!", "success")
 					
 	return render_template('upload.html', universities=universities)
 
@@ -102,12 +102,12 @@ def upload_file():
 def verify():
 	if request.method == 'POST':
 		if 'json' not in request.files or 'pdf' not in request.files:
-			flash('All files not selected')
+			flash("All files not selected", "danger")
 			return render_template('verify.html')
 		jsonFile = request.files['json']
 		pdf = request.files['pdf']
 		if jsonFile.filename == '' or pdf.filename == '':
-			flash('All files not selected')
+			flash("All files not selected", "danger")
 			return render_template('verify.html')
 		if jsonFile and allowed_verification_file(jsonFile.filename) and pdf and allowed_verification_file(pdf.filename):
 			json_name = secure_filename(jsonFile.filename)
@@ -118,9 +118,10 @@ def verify():
 
 			with open(os.path.join(app.config['JSON_FOLDER'], json_name)) as receiptJson:
 				receiptJsonData = json.loads(receiptJson.read())
-			
+
 			if resumeJsonData["cpi"] != receiptJsonData["cpi"] or resumeJsonData["name"] != receiptJsonData["name"] or resumeJsonData["year"] != receiptJsonData["year"]:
-				print("not matched")
-				flash("Details don't match")
+				flash("Details don't match", "danger")
+			else:
+				flash("Details match", "success")
 
 	return render_template('verify.html')
