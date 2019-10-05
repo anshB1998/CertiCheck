@@ -5,8 +5,6 @@
         <option value= "{{university}}" SELECTED>{{university}}</option>"
         {% endfor %}
     </select>
-    <p>Enter Batch</p>
-    <input type = 'text'>
     <h3>Select a file to upload</h3>
     <p>
         {% with messages = get_flashed_messages() %}
@@ -26,7 +24,7 @@
             </p>
         </dl>
         <p>
-            <input type="submit" value="upload">
+            <input type="submit" value="Upload">
         </p>
     </form>
 {% endblock %} 
