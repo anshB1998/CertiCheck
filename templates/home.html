@@ -1,0 +1,32 @@
+{% block body %}
+    <p>Choose University</p>
+    <select name= universities method="GET" action="/">
+        {% for university in universities %}
+        <option value= "{{university}}" SELECTED>{{university}}</option>"
+        {% endfor %}
+    </select>
+    <p>Enter Batch</p>
+    <input type = 'text'>
+    <h3>Select a file to upload</h3>
+    <p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </p>
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="upload">
+        </p>
+    </form>
+{% endblock %} 
