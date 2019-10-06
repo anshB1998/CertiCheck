@@ -23,6 +23,10 @@ def login():
 		username = request.form['username']
 	return render_template('home.html')
 
+@app.route('/', methods=['GET', 'POST'])
+def home():
+	return render_template('home.html')
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
 	print(app.config['CSV_FOLDER'])
