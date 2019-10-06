@@ -34,7 +34,7 @@ form p {
   color: #ffffff;
   font-family: Arial;
 }
-form input {
+form input[type=file] {
   position: absolute;
   margin: 0;
   padding: 0;
