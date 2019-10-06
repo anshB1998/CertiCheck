@@ -1,5 +1,5 @@
-# CertiCheck
-A blockchain application to verify the essential documents required by the applicant for an interview process. This enhances the transparency and prevents any user from faking his identity. 
+# CertiChain
+A blockchain application to verify the essential documents required by the applicant for an interview process. This enhances the transparency and prevents any user from faking his identity. The blockchain technology provides immutability and publicly verifiable transactions, these  properties  of  Blockchain  can  be  used  to  generate  the  digital  certificate  which are  anti-counterfeit  and easy to verify.
 
 
 Working:
@@ -23,3 +23,6 @@ A distributed and automated system for background verification could address sev
     Assessing information accurately, without manual effort
     Depending on third-party vendors for verification, adding to hiring costs
     Inability to verify employment if the last place of work has gone out of business
+
+
+Data  immutability  is  one  of  the  main featuresof blockchain.It  serves  as  a large  public ledger  where node  in network  verifies and save the same data. The process of certificate generation is open and transparent system where any organization can verify information of any certificate using this system.In conclusion the system helps in eradicating problems of fake certificates.
