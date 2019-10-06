@@ -14,15 +14,24 @@ A blockchain application to make the employee verification process easier for an
  <img  src="./static/images/Hash_Tree.png" alt="Merkle Tree">
 </p>
 
+A smart contract is written to map the College and the Year of Graduation to the root hash, this contract is then deployed using Ganache, Ethereum local blockchain. 
+
+## Institute Login
+<p align="center">
+ <img  src="./static/images/screenshots/login.png" alt="screenshot">
+</p>
+
 ## Upload batch data
 <p align="center">
  <img  src="./static/images/screenshots/upload.png" alt="screenshot">
 </p>
 
+## Verify Applicant Details 
+<p align="center">
+ <img  src="./static/images/screenshots/verify.png" alt="screenshot">
+</p> 
 
-A smart contract is written to map the College and the Year of Graduation to the root hash, this contract is then deployed using Ganache, Ethereum local blockchain.  
-
-When the applicant uploads his resume, it parses the resume and extracts significant details like Name, CPI, College Name and Year of Graduation using NLP techniques and stores it in a json format and creates a hash of that and combine it with the neighboring hashes and generates the root hash. 
+When the verifier uploads the applicants resume, it parses the resume and extracts significant details like Name, CPI, College Name and Year of Graduation using NLP techniques and stores it in a json format and creates a hash of that and combine it with the neighboring hashes and generates the root hash. 
 
 <p align="center">
  <img  src="./static/images/resumeparser.png" alt="Merkle Tree">
@@ -36,4 +45,11 @@ A distributed and automated system for background verification could address sev
     Inability to verify employment if the last place of work has gone out of business
 
 
-Data  immutability  is  one  of  the  main featuresof blockchain.It  serves  as  a large  public ledger  where node  in network  verifies and save the same data. The process of certificate generation is open and transparent system where any organization can verify information of any certificate using this system.In conclusion the system helps in eradicating problems of fake certificates.
+Data  immutability  is  one  of  the  main features of blockchain.It  serves  as  a large  public ledger  where node  in network  verifies and save the same data. The process of certificate generation is open and transparent system where any organization can verify information of any certificate using this system.In conclusion the system helps in eradicating problems of fake certificates.
+
+
+## Contributors
+- [@jcs98](https://github.com/jcs98)
+- [@prachiti98  ](https://github.com/prachiti98)
+- [@anshB1998 ](https://github.com/anshB1998)
+- [@bhagwatmugdha](https://github.com/bhagwatmugdha)
