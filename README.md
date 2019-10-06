@@ -20,7 +20,6 @@ When the applicant uploads his resume, it parses the resume and extracts signifi
 It then verifies this root hash with the hash on the blockchain and accordingly decides the validity of the resume.
 
 A distributed and automated system for background verification could address several challenges in hiring:
-
     Assessing information accurately, without manual effort
     Depending on third-party vendors for verification, adding to hiring costs
     Inability to verify employment if the last place of work has gone out of business
