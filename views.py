@@ -141,7 +141,7 @@ def verify():
 				# print(mt.validate_proof(receiptJsonData['merklePath'], data)) 
 				merkleRoot = mt.validate_proof(receiptJsonData['merklePath'], data)
 				bc = Blockchain("VJTI")
-				res = bc.verifyBatchMerkleRoot(receiptJsonData["institute"], receiptJsonData["year"], merkleRoot)
+				res = bc.verifyBatchMerkleRoot(receiptJsonData["institution"], receiptJsonData["year"], merkleRoot)
 				if res is True:
 					flash("Details verified successfully using the Blockchain", "success")
 				else:
