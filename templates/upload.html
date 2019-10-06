@@ -3,9 +3,10 @@
 <h1 class="text-center pt-5">Upload batch records</h1>
 <form id="uploadForm" method="post" action="/upload" enctype="multipart/form-data">
     <div class="bucket uploadBucket">
-        <input type="file" name="file" autocomplete="off" required>
-        <p>Drag your files here or click in this area.</p>
-        <button type="submit" class="btn btn-secondary btn-lg btn-block mt-5">Upload</button>
+        <input id="uploadInput" type="file" name="file" autocomplete="off" required>
+        <p id="uploadText">Drag your files here or click in this area.</p>
+        <button type="submit" class="btn bg-white text-dark btn-lg btn-block mt-5"
+            style="border-bottom: #1ac9e4 4px solid;">Upload</button>
     </div>
 </form>
 {% endblock %}

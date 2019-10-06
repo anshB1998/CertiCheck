@@ -5,19 +5,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col bucket m-3">
-                <p class="pabs">Upload Resume PDF</p>
-                <input type="file" name="pdf" autocomplete="off" required>
+                <p class="pabs" id="pdfText">Upload Resume PDF</p>
+                <input id="pdfInput" type="file" name="pdf" autocomplete="off" required>
             </div>
             <div class="col bucket m-3">
-                <p class="pabs">Upload JSON Certificate</p>
-                <input type="file" name="json" autocomplete="off" required>
+                <p class="pabs" id="jsonText">Upload JSON Certificate</p>
+                <input id="jsonInput" type="file" name="json" autocomplete="off" required>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-2"></div>
         <div class="col">
-            <button type="submit" class="btn btn-secondary btn-lg btn-block mt-5">Verify</button>
+            <button type="submit" class="btn bg-white text-dark btn-lg btn-block mt-5"
+                style="border-bottom: #1ac9e4 4px solid;">Verify</button>
         </div>
         <div class="col-2"></div>
     </div>
