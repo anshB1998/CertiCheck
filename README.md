@@ -1,4 +1,9 @@
 # CertiChain
+
+<p align="center">
+ <img  src="./static/images/logoname.png" alt="logo">
+</p>
+
 A blockchain application to verify the essential documents required by the applicant for an interview process. This enhances the transparency and prevents any user from faking his identity. The blockchain technology provides immutability and publicly verifiable transactions, these  properties  of  Blockchain  can  be  used  to  generate  the  digital  certificate  which are  anti-counterfeit  and easy to verify.
 
 

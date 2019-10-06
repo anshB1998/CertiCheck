@@ -140,8 +140,12 @@ def verify():
 				data = hashlib.sha3_256(data).hexdigest()
 				# print(mt.validate_proof(receiptJsonData['merklePath'], data)) 
 				merkleRoot = mt.validate_proof(receiptJsonData['merklePath'], data)
-				bc = Blockchain("VJTI")
-				res = bc.verifyBatchMerkleRoot(receiptJsonData["institution"], receiptJsonData["year"], merkleRoot)
+				res = False
+				try:
+					bc = Blockchain("VJTI")
+					res = bc.verifyBatchMerkleRoot(receiptJsonData["institution"], receiptJsonData["year"], merkleRoot)
+				except:
+					print("Error occurred")
 				if res is True:
 					flash("Details verified successfully using the Blockchain", "success")
 				else:
