@@ -14,6 +14,9 @@ import ast
 # Prachiti Resume Parser
 from resumeParser import ResumeParser
 
+# Jainam Blockchain
+from blockchain import Blockchain
+
 UNIVERSITY_ALLOWED_EXTENSIONS = set(['csv'])
 VERIFIER_ALLOWED_EXTENSIONS = set(['pdf', 'json'])
 
@@ -64,6 +67,7 @@ def upload_file():
 					
 					#studentID CPI Name batch college
 					data = str(row[0]) + str(row[2]) + str(row[1]) + str(row[3]) + session['username']
+					batch = str(row[3])
 					mt.add_leaf(data, do_hash= True)
 					count += 1
 
@@ -73,7 +77,15 @@ def upload_file():
 				# print(count, mt.get_leaf_count())
 			if mt.get_tree_ready_state:
 				merkleRoot = mt.get_merkle_root()
-			print(merkleRoot)
+			institute = session['username']
+			bc = Blockchain(institute)
+			print("Adding to the blockchain: ", session['username'], batch, merkleRoot)
+			try:
+				bc.addBatchMerkleRoot(batch, merkleRoot)
+			except:
+				error = "Institute not registered!"
+				return render_template('upload.html', universities=universities, error=error)
+
 
 			itr = 0
 
@@ -94,7 +106,7 @@ def upload_file():
 					with open(os.path.join(app.config['RECEIPT_FOLDER'], filename), 'w') as json_file:
 						json_file.write(json.dumps(data))
 					
-				flash("Successfully uploaded!", "success")
+				flash("Successfully uploaded to blockchain!", "success")
 					
 	return render_template('upload.html', universities=universities)
 
@@ -126,8 +138,13 @@ def verify():
 				data = receiptJsonData['studentId'] + receiptJsonData['cpi'] + receiptJsonData['name'] + receiptJsonData['year'] + receiptJsonData['institution']
 				data = data.encode()
 				data = hashlib.sha3_256(data).hexdigest()
-				# data = bytearray.fromhex(data)
-				print(mt.validate_proof(receiptJsonData['merklePath'], data)) 
-				flash("Details match", "success")
+				# print(mt.validate_proof(receiptJsonData['merklePath'], data)) 
+				merkleRoot = mt.validate_proof(receiptJsonData['merklePath'], data)
+				bc = Blockchain("VJTI")
+				res = bc.verifyBatchMerkleRoot(receiptJsonData["institute"], receiptJsonData["year"], merkleRoot)
+				if res is True:
+					flash("Details verified successfully using the Blockchain", "success")
+				else:
+					flash("Details don't match", "danger")
 
 	return render_template('verify.html')
