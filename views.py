@@ -1,6 +1,6 @@
 import os
 from app import app
-from flask import Flask, flash, request, redirect, render_template
+from flask import Flask, flash, request, redirect, render_template, session
 from werkzeug.utils import secure_filename
 import csv
 # Mugdha imports for Merkle Tree
@@ -18,10 +18,16 @@ def allowed_file(filename):
 def allowed_verification_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in VERIFIER_ALLOWED_EXTENSIONS
 
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+	universities = ['VJTI', 'IITB', 'KJSCE']
 	if request.method == 'POST':
 		username = request.form['username']
-	return render_template('home.html')
+		session['logged_in'] = True
+		session['username'] = username
+		# print(session['username'])
+		return render_template('upload.html', universities=universities)
+	return render_template('login.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -29,18 +35,15 @@ def home():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
-	print(app.config['CSV_FOLDER'])
-	print(os.getcwd())
 	universities = ['VJTI', 'IITB', 'KJSCE']
-	# login()
 	if request.method == 'POST':
 		if 'file' not in request.files:
 			flash('No file selected')
-			return render_template('home.html', universities=universities)
+			return render_template('upload.html', universities=universities)
 		file = request.files['file']
 		if file.filename == '':
 			flash('No file selected')
-			return render_template('home.html', universities=universities)
+			return render_template('upload.html', universities=universities)
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['CSV_FOLDER'], filename))
