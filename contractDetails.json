@@ -1,5 +1,5 @@
 {
     "abi": [{"constant":false,"inputs":[{"internalType":"string","name":"_instituteName","type":"string"},{"internalType":"string","name":"_batchPeriod","type":"string"},{"internalType":"string","name":"_merkleRoot","type":"string"}],"name":"addBatchMerkleRoot","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_instituteName","type":"string"}],"name":"registerInstitute","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"_instituteName","type":"string"},{"internalType":"string","name":"_batchPeriod","type":"string"},{"internalType":"string","name":"_merkleRoot","type":"string"}],"name":"verifyBatchMerkleRoot","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}],
 
-    "address": "0xb712784a3b8Ae2207D2890857297b31d3D540179"
+    "address": "0x383e7A666ECc85d4dA43dFb1F7f269D27dcA6dFB"
 }
