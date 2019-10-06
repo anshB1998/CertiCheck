@@ -39,13 +39,14 @@ When the verifier uploads the applicants resume, it parses the resume and extrac
 
 It then verifies this root hash with the hash on the blockchain and accordingly decides the validity of the resume.
 
+## Features
 A distributed and automated system for background verification could address several challenges in hiring:
-    Assessing information accurately, without manual effort
-    Depending on third-party vendors for verification, adding to hiring costs
-    Inability to verify employment if the last place of work has gone out of business
+   * Assessing information accurately, without manual effort
+   * Depending on third-party vendors for verification, adding to hiring costs
+   * Inability to verify employment if the last place of work has gone out of business
 
 
-Data  immutability  is  one  of  the  main features of blockchain.It  serves  as  a large  public ledger  where node  in network  verifies and save the same data. The process of certificate generation is open and transparent system where any organization can verify information of any certificate using this system.In conclusion the system helps in eradicating problems of fake certificates.
+Data  immutability  is  one  of  the  main features of blockchain.It  serves  as  a large  public ledger  where node  in network  verifies and save the same data. The process of certificate generation is an open and transparent system where any organization can verify information of any certificate using this system.In conclusion the system helps in eradicating problems of fake certificates.
 
 
 ## Contributors
