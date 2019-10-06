@@ -51,7 +51,6 @@ class ResumeParser:
 		resume_string = convert(filename)
 
 		scores = extract_decimals(resume_string)
-		print(resume_string)
 		cpi.append(scores[0])
 
 		tokens = word_tokenize(resume_string)

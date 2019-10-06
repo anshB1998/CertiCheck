@@ -122,6 +122,12 @@ def verify():
 			if resumeJsonData["cpi"] != receiptJsonData["cpi"] or resumeJsonData["name"] != receiptJsonData["name"] or resumeJsonData["year"] != receiptJsonData["year"]:
 				flash("Details don't match", "danger")
 			else:
+				mt = MerkleTools(hash_type='sha3_256')
+				data = receiptJsonData['studentId'] + receiptJsonData['cpi'] + receiptJsonData['name'] + receiptJsonData['year'] + receiptJsonData['institution']
+				data = data.encode()
+				data = hashlib.sha3_256(data).hexdigest()
+				# data = bytearray.fromhex(data)
+				print(mt.validate_proof(receiptJsonData['merklePath'], data)) 
 				flash("Details match", "success")
 
 	return render_template('verify.html')
