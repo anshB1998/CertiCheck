@@ -10,7 +10,15 @@ A blockchain application to verify the essential documents required by the appli
 
 ## Working
 <p align="justify">
-A blockchain application to make the employee verification process easier for any employer. It constructs a Merkle Tree which contains nodes consisting of the hashes of the data given by the universities (Name, CPI, College Name and Year of Graduation). The root of this Merkle tree is then put on the Ethereum blockchain.
+A blockchain application to make the employee verification process easier for any employer. 
+</p>
+
+<p align="center">
+ <img  src="./static/images/logoname.jpg" alt="logo">
+</p>
+
+<p align="justify">
+It constructs a Merkle Tree which contains nodes consisting of the hashes of the data given by the universities (Name, CPI, College Name and Year of Graduation). The root of this Merkle tree is then put on the Ethereum blockchain.
 </p>
 
 <p align="center">
@@ -44,17 +52,20 @@ When the verifier uploads the applicants resume, it parses the resume and extrac
  <img  src="./static/images/resumeparser.png" alt="Merkle Tree">
 </p>
 
+<p align="center">
+ <img  src="./static/images/logoname.jpg" alt="logo">
+</p>
+
 <p align="justify">
 It then verifies this root hash with the hash on the blockchain and accordingly decides the validity of the resume.
  </p>
 
 ## Features
-<p align="justify">
 A distributed and automated system for background verification could address several challenges in hiring:
-   * Assessing information accurately, without manual effort
-   * Depending on third-party vendors for verification, adding to hiring costs
-   * Inability to verify employment if the last place of work has gone out of business
- </p>
+- Assessing information accurately, without manual effort
+- Depending on third-party vendors for verification, adding to hiring costs
+- Inability to verify employment if the last place of work has gone out of business
+
 
 <p align="justify">
 Data  immutability  is  one  of  the  main features of blockchain.It  serves  as  a large  public ledger  where node  in network  verifies and save the same data. The process of certificate generation is an open and transparent system where any organization can verify information of any certificate using this system.In conclusion the system helps in eradicating problems of fake certificates.
