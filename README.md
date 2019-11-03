@@ -14,7 +14,7 @@ A blockchain application to make the employee verification process easier for an
 </p>
 
 <p align="center">
- <img  src="./static/images/logoname.jpg" alt="logo">
+ <img  src="./static/images/BlockDiagram_CertiChain.jpg" alt="blockdiagram">
 </p>
 
 <p align="justify">
@@ -52,13 +52,9 @@ When the verifier uploads the applicants resume, it parses the resume and extrac
  <img  src="./static/images/resumeparser.png" alt="Merkle Tree">
 </p>
 
-<p align="center">
- <img  src="./static/images/logoname.jpg" alt="logo">
-</p>
-
 <p align="justify">
 It then verifies this root hash with the hash on the blockchain and accordingly decides the validity of the resume.
- </p>
+</p>
 
 ## Features
 A distributed and automated system for background verification could address several challenges in hiring:
